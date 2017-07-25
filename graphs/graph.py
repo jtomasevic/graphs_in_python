@@ -1,4 +1,4 @@
-""" module description """
+""" Define abstract class to represent graph """
 from abc import ABCMeta, abstractmethod
 
 
