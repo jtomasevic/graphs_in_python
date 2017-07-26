@@ -1,7 +1,6 @@
 """ Define abstract class to represent graph """
 from abc import ABCMeta, abstractmethod
 
-
 class Graph:
     """ Abstract class to represent Graph """
     __metaclass__ = ABCMeta
