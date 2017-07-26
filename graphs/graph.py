@@ -10,7 +10,7 @@ class Graph:
         self.num_vertices = num_vertices
         self.directed = directed
     @abstractmethod
-    def add_edge(self, v_1, v_2, weight):
+    def add_edge(self, vertex_a, vertex_b, weight):
         """ add conection between vertices v1 and v2 with  provided weight  """
         pass
     @abstractmethod

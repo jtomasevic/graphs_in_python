@@ -1,32 +1,57 @@
-#
-#
-#
-#############
+"""
+Represents a graph as an adjacency set. Graph is represent as list of Nodes.
+Each node has set of adjacent vertices.
+This implementation covers only unweighted edges.
+"""
 from graphs.graph import Graph
-import numpy as np
+from graphs.node import Node
 
 class AdjacenecySetGraph(Graph):
     """ Represent a graph as an adjacency set. """
     matrix = None
+    vertex_list = []
     def __init__(self, num_vertices, directed=False):
         """ first call base constructor, and then set..."""
         super(AdjacenecySetGraph, self).__init__(num_vertices, directed)
-    def add_edge(self, v_1, v_2, weight=1):
+        self.vertex_list = []
+        for i in range(num_vertices):
+            self.vertex_list.append(Node(i))
+    def add_edge(self, vertex_a, vertex_b, weight=1):
         """ add conection between vertices v1 and v2 with  provided weight  """
-        if v_1 >= self.num_vertices or v_2 >= self.num_vertices or v_1 < 0 or v_2 < 0:
-            raise ValueError("Vertices %d and %d are out of bounds" % (v_1, v_2))
-        if weight < 1:
-            raise ValueError("An edge cannot have wwight less than one")
+        # check constrains
+        if (vertex_a >= self.num_vertices or vertex_b >= self.num_vertices
+                or vertex_a < 0 or vertex_b < 0):
+            raise ValueError("Vertices %d and %d are out of bounds" % (vertex_a, vertex_b))
+        if weight != 1:
+            raise ValueError("This graph implmentation doesn't support wighted edges")
+        # add vertex b to set adjacency set of vertex a
+        self.vertex_list[vertex_a].add_edge(vertex_b)
+        # if graph is not directed then we need to add edge from b to a also
+        if not self.directed:
+            self.vertex_list[vertex_b].add_edge(vertex_a)
     def get_adjacent_vertices(self, vertex):
         """ return vertices connected with vertex """
+        # check constrains
         if vertex < 0 or vertex >= self.num_vertices:
             raise ValueError("Cannot access vertex %d" % vertex)
+        # just refer to provided vertex and return its adjacent vertices set
+        return self.vertex_list[vertex].get_adjacent_vertices()
     def get_indegree(self, vertex):
-        """ return number of incoming edges """
+        """ Return number of incoming edges.
+            It means: how many nodes(vertices) had edge to the provided vertex
+        """
         if vertex < 0 or vertex >= self.num_vertices:
             raise ValueError("Cannot access vertex %d" % vertex)
+        indegree = 0
+        # how many nodes has edge to the provided node
+        for i in range(self.num_vertices):
+            if vertex in self.get_adjacent_vertices(i):
+                indegree = indegree + 1
+        return indegree
     def get_edge_weight(self, v_1, v_2):
         """ return wieght between vertices v1 and v2 """
         return 1
     def display(self):
-        print "A"
+        for i in range(self.num_vertices):
+            for vertex in self.get_adjacent_vertices(i):
+                print(i, "-->", vertex)
