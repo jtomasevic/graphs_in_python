@@ -3,6 +3,7 @@ from graphs.adjacency_matrix_graph import AdjacenecyMatrixGraph
 from graphs.adjacency_set_graph import AdjacenecySetGraph
 from graphs.traversals import *
 from graphs.topological_sort import topological_sort
+from graphs.shortest_paths import shortest_path
 
 graph = AdjacenecyMatrixGraph(4, directed=True)
 graph.add_edge(0,1)
@@ -64,5 +65,24 @@ graph.add_edge(3,6)
 graph.add_edge(3,4)
 graph.add_edge(6,8)
 
-
+print "topological sort example:"
 topological_sort(graph)
+
+
+graph = AdjacenecySetGraph(9, directed=True)
+graph.add_edge(0,1)
+graph.add_edge(1,2)
+graph.add_edge(1,3)
+graph.add_edge(2,3)
+graph.add_edge(1,4)
+graph.add_edge(3,5)
+graph.add_edge(5,4)
+graph.add_edge(3,6)
+graph.add_edge(6,7)
+graph.add_edge(0,7)
+
+shortest_path(graph, 0, 5)
+shortest_path(graph, 0, 6)
+shortest_path(graph, 7, 4)
+
+
