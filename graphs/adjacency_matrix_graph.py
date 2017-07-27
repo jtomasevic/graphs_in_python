@@ -31,7 +31,13 @@ class AdjacenecyMatrixGraph(Graph):
                 adjacent_vertices.append(i)
         return adjacent_vertices
     def get_indegree(self, vertex):
-        """ return number of incoming edges """
+        """ In short: number of incoming edges.
+            Number of edges that flow into provided node:vertex
+            In the case of direceted graph definition would be:
+            Number of directed edges that directly flow into the node.
+            Which means on how many nodes this node depends on. This is important
+            for topological sort
+        """
         if vertex < 0 or vertex >= self.num_vertices:
             raise ValueError("Cannot access vertex %d" % vertex)
         indegree = 0

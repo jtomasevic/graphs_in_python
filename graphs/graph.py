@@ -18,7 +18,13 @@ class Graph:
         pass
     @abstractmethod
     def get_indegree(self, vertex):
-        """ return number of edges """
+        """ In short: number of incoming edges.
+            Number of edges that flow into provided node:vertex
+            In the case of direceted graph definition would be:
+            Number of directed edges that directly flow into the node.
+            Which means on how many nodes this node depends on. This is important
+            for topological sort
+        """
         pass
     @abstractmethod
     def get_edge_weight(self, v_1, v_2):

@@ -37,8 +37,12 @@ class AdjacenecySetGraph(Graph):
         # just refer to provided vertex and return its adjacent vertices set
         return self.vertex_list[vertex].get_adjacent_vertices()
     def get_indegree(self, vertex):
-        """ Return number of incoming edges.
-            It means: how many nodes(vertices) had edge to the provided vertex
+        """ In short: number of incoming edges.
+            Number of edges that flow into provided node:vertex
+            In the case of direceted graph definition would be:
+            Number of directed edges that directly flow into the node.
+            Which means on how many nodes this node depends on. This is important
+            for topological sort
         """
         if vertex < 0 or vertex >= self.num_vertices:
             raise ValueError("Cannot access vertex %d" % vertex)
